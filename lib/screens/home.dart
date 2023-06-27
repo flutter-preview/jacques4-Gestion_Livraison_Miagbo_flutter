@@ -5,8 +5,6 @@ import 'package:gestion_livraison/screens/pages/dashboard.dart';
 import 'package:gestion_livraison/screens/pages/profile.dart';
 import 'package:gestion_livraison/screens/pages/setting.dart';
 
-import 'pages/qr_code.dart';
-
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -37,10 +35,10 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey[300],
-        child: const Icon(Icons.qr_code_scanner, color: Colors.green),
+        child: Icon(Icons.home, color: Colors.green[900]),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: ((context) => const QrCode())));
+          Navigator.push(
+              context, MaterialPageRoute(builder: ((context) => const Home())));
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -66,7 +64,7 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.home,
+                        Icons.dashboard,
                         color:
                             currentTab == 0 ? Colors.green[900] : Colors.grey,
                       ),
@@ -91,7 +89,7 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.motorcycle,
+                        Icons.motorcycle_rounded,
                         color:
                             currentTab == 1 ? Colors.green[900] : Colors.grey,
                       ),

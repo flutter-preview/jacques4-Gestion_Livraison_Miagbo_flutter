@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gestion_livraison/models/Livraison.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 
 class EtatLivraison extends StatelessWidget {
-  final Livraison livraison;
+  Livraison livraison;
 
   EtatLivraison({required this.livraison});
 
@@ -19,152 +17,122 @@ class EtatLivraison extends StatelessWidget {
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 50),
-          Text(
-            'L\' Etat de Livraison',
-            style: GoogleFonts.bebasNeue(fontSize: 40),
+          const SizedBox(height: 30),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              "État de livraison",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
           ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: 3,
-              padding: const EdgeInsets.all(16),
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage:
-                        const AssetImage("assets/images/ramassage.jpg"),
-                    child: TextButton(
-                      child: const Text(
-                        "Ramassage",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              const Text(" De \n Lome \n 19 Mai 2023"),
+              const SizedBox(width: 200),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      const Text("Livré à "),
+                      Text(
+                        livraison.commande['client']['residence'],
+                        style: TextStyle(color: Colors.green[900]),
                       ),
-                      onPressed: () {
-                        mettreAJourEtatLivraison(livraison.id, 'RAMASSAGE');
-                      },
-                    ),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage:
-                        const AssetImage("assets/images/ramasse.jpg"),
-                    child: TextButton(
-                      child: const Text("Ramassé",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.black)),
-                      onPressed: () {
-                        mettreAJourEtatLivraison(livraison.id, 'RAMASSE');
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage:
-                        const AssetImage("assets/images/transi.jpeg"),
-                    child: TextButton(
-                      child: const Text("Transi",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.black)),
-                      onPressed: () {
-                        mettreAJourEtatLivraison(livraison.id, 'TRANSI');
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage:
-                        const AssetImage("assets/images/livraison.jpg"),
-                    child: TextButton(
-                      child: const Text("Livraison",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.black)),
-                      onPressed: () {
-                        mettreAJourEtatLivraison(livraison.id, 'LIVRAISON');
-                      },
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage:
-                        const AssetImage("assets/images/livree.jpeg"),
-                    child: TextButton(
-                      child: const Text("Livré",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.black)),
-                      onPressed: () {
-                        mettreAJourEtatLivraison(livraison.id, 'LIVRE');
-                      },
-                    ),
-                  ),
-                ),
+                  const Text("Livraison prevu"),
+                  const Text("  en attente")
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 50),
+          SizedBox(
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildCircle(livraison.ramassage, 'Ramassage'),
+                _buildLine(livraison.ramassage && livraison.ramasse),
+                _buildCircle(livraison.ramasse, 'Ramasse'),
+                _buildLine(livraison.ramasse && livraison.transi),
+                _buildCircle(livraison.transi, 'Transi'),
+                _buildLine(livraison.transi && livraison.livraison),
+                _buildCircle(livraison.livraison, 'Livraison'),
+                _buildLine(livraison.livraison && livraison.livrer),
+                _buildCircle(livraison.livrer, 'Livrer'),
               ],
             ),
           ),
+          Row(
+            children: [
+              Column(
+                children: [
+                  const SizedBox(height: 50),
+                  const Text("Le parcours de votre distance vaut 15 Km\n"),
+                  Row(
+                    children: [
+                      const Text("  Le livreur : "),
+                      Text(livraison.commande['livreur']['name']),
+                      const Text(" "),
+                      Text(livraison.commande['livreur']['prenom']),
+                      const Text(" est en charge de votre livraison"),
+                      const SizedBox(
+                        height: 60,
+                      )
+                    ],
+                  ),
+                  const Text(" Contact du livreur"),
+                  TextButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.phone),
+                      label: Text(livraison.commande['livreur']['tel']))
+                ],
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 
-  Future<void> mettreAJourEtatLivraison(
-      int livraisonId, String actionLivreur) async {
-    String nouvelEtat;
+  Widget _buildCircle(bool isActive, String text) {
+    Color color = isActive ? Colors.green : Colors.grey;
+    return Column(
+      children: [
+        Container(
+          width: 30,
+          height: 30,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          text,
+          style: TextStyle(
+            color: color,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
 
-    // Déterminez le nouvel état en fonction de l'action du livreur
-    switch (actionLivreur) {
-      case 'RAMASSAGE':
-        nouvelEtat = 'RAMASSAGE';
-        break;
-      case 'RAMASSE':
-        nouvelEtat = 'RAMASSE';
-        break;
-      case 'TRANSI':
-        nouvelEtat = 'TRANSI';
-        break;
-      case 'LIVRAISON':
-        nouvelEtat = 'LIVRAISON';
-        break;
-      case 'LIVRE':
-        nouvelEtat = 'LIVRE';
-        break;
-      default:
-        return; // Action invalide, ne faites rien
-    }
-
-    // Envoyer la requête PUT pour mettre à jour l'état de la commande
-    try {
-      await http.put(
-          Uri.parse('http://192.168.1.72:8080/livraison/$livraisonId'),
-          body: {'etat': nouvelEtat});
-
-      print('L\'état de la livraison a été mis à jour avec succès.');
-    } catch (e) {
-      print('Erreur lors de la mise à jour de l\'état de la livraison : $e');
-    }
+  Widget _buildLine(bool isActive) {
+    Color color = isActive ? Colors.green : Colors.grey;
+    return Expanded(
+      child: Container(
+        height: 5,
+        color: color,
+      ),
+    );
   }
 }

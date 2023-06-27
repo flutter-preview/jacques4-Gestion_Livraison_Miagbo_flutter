@@ -5,6 +5,7 @@ import 'package:gestion_livraison/GoogleMaps/order_traking_page.dart';
 import 'package:gestion_livraison/controllers/LivraisonController.dart';
 import 'package:gestion_livraison/models/Livraison.dart';
 import 'package:gestion_livraison/screens/pages/etat_livraison.dart';
+import 'package:gestion_livraison/screens/pages/qr_code.dart';
 import 'package:provider/provider.dart';
 
 class LivraisonListScreen extends StatefulWidget {
@@ -41,7 +42,9 @@ class _LivraisonListScreenState extends State<LivraisonListScreen> {
             if (error is TimeoutException) {
               return Text(erreur);
             }
-            return Align(alignment: Alignment.center, child: Text(erreur));
+            return const Align(
+                alignment: Alignment.center,
+                child: Text("Erreur de recuperation des donnees de l'Api"));
           } else {
             final livraisons = snapshot.data;
             var response = snapshot.data as List<Livraison>;
@@ -134,37 +137,56 @@ class LivraisonDetailsScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) =>
-                                  EtatLivraison(livraison: livraison))));
+                              builder: ((context) => EtatLivraison(
+                                    livraison: livraison,
+                                  ))));
                     },
                     icon: Icon(
-                      Icons.card_giftcard,
+                      Icons.route,
                       color: Colors.green[900],
                     ),
-                    label: Text("Etat Livraison",
+                    label: Text("Suivi",
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                             color: Colors.green[900]))),
-                const SizedBox(width: 100),
                 TextButton.icon(
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => OrderTrackingPage())));
+                              builder: ((context) => const QrCode())));
+                    },
+                    icon: Icon(
+                      Icons.qr_code_sharp,
+                      color: Colors.green[900],
+                    ),
+                    label: Text("Qr code",
+                        style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green[900]))),
+                TextButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => OrderTrackingPage(
+                                    livraison: livraison,
+                                  ))));
                     },
                     icon: Icon(
                       Icons.map,
                       color: Colors.green[900],
                     ),
-                    label: Text("Position",
+                    label: Text("Map",
                         style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                             color: Colors.green[900]))),
               ],
             ),
+            const SizedBox(height: 10),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

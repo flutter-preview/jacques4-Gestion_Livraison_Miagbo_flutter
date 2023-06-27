@@ -3,7 +3,11 @@ class Livraison {
   String date;
   bool status;
   double distance;
-  String etat;
+  bool ramassage;
+  bool ramasse;
+  bool transi;
+  bool livraison;
+  bool livrer;
   dynamic commande;
 
   Livraison(
@@ -11,7 +15,11 @@ class Livraison {
       required this.date,
       required this.status,
       required this.distance,
-      required this.etat,
+      required this.ramassage,
+      required this.ramasse,
+      required this.transi,
+      required this.livraison,
+      required this.livrer,
       required this.commande});
 
   factory Livraison.fromJson(Map<String, dynamic> json) {
@@ -20,7 +28,11 @@ class Livraison {
         date: json['date'],
         status: json['status'],
         distance: json['distance'],
-        etat: json['etat'],
+        ramassage: json['ramassage'],
+        ramasse: json['ramasse'],
+        transi: json['transi'],
+        livraison: json['livraison'],
+        livrer: json['livrer'],
         commande: json['commande']);
   }
   Map<String, dynamic> toJson() {
@@ -29,13 +41,17 @@ class Livraison {
       'date': date,
       'status': status,
       'distance': distance,
-      'etat': etat,
+      'ramassage': ramassage,
+      'ramasse': ramasse,
+      'transi': transi,
+      'livraison': livraison,
+      'livrer': livrer,
       'commande': commande,
     };
   }
 
   @override
   String toString() {
-    return "Livraisons{id : $id, date:$date, status:$status,distance:$distance,etat:$etat,commande:$commande}";
+    return "Livraisons{id : $id, date:$date, status:$status,distance:$distance,ramassage:$ramassage,ramasse:$ramasse,transi:$transi,livraison:$livraison,livrer:$livrer,commande:$commande}";
   }
 }
