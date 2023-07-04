@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Setting extends StatefulWidget {
-  const Setting({super.key});
+class Deconnexion extends StatefulWidget {
+  const Deconnexion({super.key});
 
   @override
-  State<Setting> createState() => _SettingState();
+  State<Deconnexion> createState() => _Deconnexion();
 }
 
-class _SettingState extends State<Setting> {
+class _Deconnexion extends State<Deconnexion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

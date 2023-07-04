@@ -176,9 +176,9 @@ class AddFournisseurScreen extends StatelessWidget {
                 prenom: prenomController.text,
                 email: emailController.text,
                 tel: telController.text,
-                longitude: longitudeController.text,
+                longitude: double.parse(longitudeController.text),
                 residence: longitudeController.text,
-                latitude: latitudeController.text,
+                latitude: double.parse(latitudeController.text),
               );
               Provider.of<FournisseurProvider>(context, listen: false)
                   .addFournisseur(newFournisseur);
@@ -215,8 +215,8 @@ class UpdateFournisseurScreen extends StatelessWidget {
     emailController.text = fournisseur.email;
     telController.text = fournisseur.tel;
     residenceController.text = fournisseur.residence;
-    longitudeController.text = fournisseur.longitude;
-    latitudeController.text = fournisseur.latitude;
+    longitudeController.text = fournisseur.longitude.toString();
+    latitudeController.text = fournisseur.latitude.toString();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mis a jour d\'un Fournisseur'),
@@ -259,9 +259,9 @@ class UpdateFournisseurScreen extends StatelessWidget {
                 prenom: prenomController.text,
                 email: emailController.text,
                 tel: telController.text,
-                longitude: longitudeController.text,
+                longitude: double.parse(longitudeController.text),
                 residence: residenceController.text,
-                latitude: latitudeController.text,
+                latitude: double.parse(latitudeController.text),
               );
 
               Provider.of<FournisseurProvider>(context, listen: false)

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gestion_livraison/models/Livraison.dart';
 
+// ignore: must_be_immutable
 class EtatLivraison extends StatelessWidget {
   Livraison livraison;
 
@@ -34,12 +35,12 @@ class EtatLivraison extends StatelessWidget {
           Row(
             children: [
               const Text(" De \n Lome \n 19 Mai 2023"),
-              const SizedBox(width: 200),
+              const SizedBox(width: 140),
               Column(
                 children: [
                   Row(
                     children: [
-                      const Text("Livré à "),
+                      const Text("A "),
                       Text(
                         livraison.commande['client']['residence'],
                         style: TextStyle(color: Colors.green[900]),
@@ -75,24 +76,24 @@ class EtatLivraison extends StatelessWidget {
               Column(
                 children: [
                   const SizedBox(height: 50),
-                  const Text("Le parcours de votre distance vaut 15 Km\n"),
+                  const Text(
+                      "          Le parcours de votre distance vaut 15 Km\n"),
                   Row(
                     children: [
-                      const Text("  Le livreur : "),
-                      Text(livraison.commande['livreur']['name']),
-                      const Text(" "),
-                      Text(livraison.commande['livreur']['prenom']),
-                      const Text(" est en charge de votre livraison"),
+                      const Text("            Livreur chargé : "),
+                      Text(
+                          "${livraison.commande['livreur']['name']}  ${livraison.commande['livreur']['prenom']}"),
                       const SizedBox(
                         height: 60,
                       )
                     ],
                   ),
-                  const Text(" Contact du livreur"),
+                  const Text("              Contact du livreur"),
                   TextButton.icon(
                       onPressed: () {},
                       icon: const Icon(Icons.phone),
-                      label: Text(livraison.commande['livreur']['tel']))
+                      label: Text(
+                          "          ${livraison.commande['livreur']['tel']}"))
                 ],
               ),
             ],

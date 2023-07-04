@@ -9,6 +9,8 @@ class AssetsImages {
   static const ramassageJpg = 'assets/images/ramassage.jpg';
   static const ramasseJpg = 'assets/images/ramasse.jpg';
   static const transiJpeg = 'assets/images/transi.jpeg';
+  static const userJpg = 'assets/images/user.jpg';
+  static const userProfilePng = 'assets/images/user-profile.png';
 }
 
 class AssetsSvgs {

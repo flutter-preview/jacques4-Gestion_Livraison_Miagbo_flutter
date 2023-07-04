@@ -70,7 +70,7 @@ class _LivraisonListScreenState extends State<LivraisonListScreen> {
                             fontSize: 18,
                             color: Colors.green[900]),
                       ),
-                      subtitle: Text(livraison.commande['client']['name']),
+                      subtitle: Text(livraison.commande['client']['nom']),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -119,72 +119,80 @@ class LivraisonDetailsScreen extends StatelessWidget {
           "Livraison Miagbo",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        centerTitle: true,
       ),
       body: Container(
         width: 600,
         height: 500,
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(20),
             color: Colors.white70,
             border: Border.all(color: Colors.green)),
         child: Column(
           children: [
-            Row(
-              children: [
-                TextButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => EtatLivraison(
-                                    livraison: livraison,
-                                  ))));
-                    },
-                    icon: Icon(
-                      Icons.route,
-                      color: Colors.green[900],
-                    ),
-                    label: Text("Suivi",
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green[900]))),
-                TextButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => const QrCode())));
-                    },
-                    icon: Icon(
-                      Icons.qr_code_sharp,
-                      color: Colors.green[900],
-                    ),
-                    label: Text("Qr code",
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green[900]))),
-                TextButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => OrderTrackingPage(
-                                    livraison: livraison,
-                                  ))));
-                    },
-                    icon: Icon(
-                      Icons.map,
-                      color: Colors.green[900],
-                    ),
-                    label: Text("Map",
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green[900]))),
-              ],
+            const SizedBox(height: 1),
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(17)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => EtatLivraison(
+                                      livraison: livraison,
+                                    ))));
+                      },
+                      icon: Icon(
+                        Icons.route,
+                        color: Colors.green[900],
+                      ),
+                      label: Text("Suivi",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[900]))),
+                  TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => const QrCode())));
+                      },
+                      icon: Icon(
+                        Icons.qr_code_sharp,
+                        color: Colors.green[900],
+                      ),
+                      label: Text("Qr code",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[900]))),
+                  TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => OrderTrackingPage(
+                                      livraison: livraison,
+                                    ))));
+                      },
+                      icon: Icon(
+                        Icons.location_pin,
+                        color: Colors.green[900],
+                      ),
+                      label: Text("Map",
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[900]))),
+                ],
+              ),
             ),
             const SizedBox(height: 10),
             Align(
@@ -200,64 +208,75 @@ class LivraisonDetailsScreen extends StatelessWidget {
                 child: Text('  Date livraison: ${livraison.date}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text('  Distance: ${livraison.distance}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Nom Client: ${livraison.commande['client']['name']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Prenom Client: ${livraison.commande['client']['prenom']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Adresse: ${livraison.commande['client']['residence']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Nom Produit: ${livraison.commande['produit']['nomProduit']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Description: ${livraison.commande['produit']['description']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text('  Quantite: ${livraison.commande['quantite']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Nom Vendeur: ${livraison.commande['produit']['fournisseur']['nom']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Prenom Vendeur: ${livraison.commande['produit']['fournisseur']['prenom']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                     '  Adresse: ${livraison.commande['produit']['fournisseur']['residence']}',
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 15))),
+            const SizedBox(height: 5),
             /*Align(
               alignment: Alignment.centerLeft,
               child: ElevatedButton(
@@ -269,18 +288,18 @@ class LivraisonDetailsScreen extends StatelessWidget {
                 child: const Text('Supprimer'),
               ),
             ),*/
-            const SizedBox(height: 100),
+            const SizedBox(height: 70),
             TextButton.icon(
                 onPressed: () {},
                 icon: Icon(
                   Icons.motorcycle,
                   color: Colors.green[900],
-                  size: 40,
+                  size: 30,
                 ),
                 label: Text(
                   "Faire cette course",
                   style: TextStyle(
-                      fontSize: 17,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.green[900]),
                 )),

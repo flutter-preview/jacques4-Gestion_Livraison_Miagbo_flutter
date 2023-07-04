@@ -3,7 +3,7 @@ import 'package:gestion_livraison/models/Livraison.dart';
 import 'package:http/http.dart' as http;
 
 class LivraisonApiService {
-  String baseUrl = "http://192.168.1.72:8080";
+  String baseUrl = "http://192.168.137.1:8080";
 
   Future<List<Livraison>> getLivraison() async {
     final response = await http.get(Uri.parse("$baseUrl/livraisons"));

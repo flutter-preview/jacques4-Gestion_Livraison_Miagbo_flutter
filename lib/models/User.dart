@@ -1,18 +1,18 @@
 class User {
   int id;
-  String name;
+  String nom;
   String prenom;
   String tel;
   String email;
   String password;
   String residence;
-  String longitude;
-  String latitude;
+  double longitude;
+  double latitude;
   String userRole;
 
   User(
       {this.id = 0,
-      required this.name,
+      required this.nom,
       required this.prenom,
       required this.tel,
       required this.email,
@@ -25,7 +25,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
         id: json['id'],
-        name: json['name'],
+        nom: json['nom'],
         prenom: json['prenom'],
         tel: json['tel'],
         email: json['email'],
@@ -38,7 +38,7 @@ class User {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
+      'nom': nom,
       'prenom': prenom,
       'tel': tel,
       'email': email,
@@ -52,6 +52,6 @@ class User {
 
   @override
   String toString() {
-    return "Users{id : $id,name :$name, prenom:$prenom, tel:$tel, email:$email,password:$password,residence:$residence,latitude:$latitude,longitude:$longitude,userRole:$userRole}";
+    return "Users{id : $id,nom :$nom, prenom:$prenom, tel:$tel, email:$email,password:$password,residence:$residence,latitude:$latitude,longitude:$longitude,userRole:$userRole}";
   }
 }

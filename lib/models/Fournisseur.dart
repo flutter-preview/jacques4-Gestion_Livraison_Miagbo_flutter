@@ -7,8 +7,8 @@ class Fournisseur {
   String tel;
   String email;
   String residence;
-  String longitude;
-  String latitude;
+  double longitude;
+  double latitude;
 
   Fournisseur({
     this.id = 0,

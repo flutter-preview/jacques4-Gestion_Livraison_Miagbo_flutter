@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gestion_livraison/models/Livraison.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+// ignore: must_be_immutable
 class OrderTrackingPage extends StatelessWidget {
   Livraison livraison;
   OrderTrackingPage({super.key, required this.livraison});
@@ -18,8 +19,14 @@ class OrderTrackingPage extends StatelessWidget {
     var latClient = livraison.commande['client']['latitude'];
     var longClient = livraison.commande['client']['longitude'];
 
-    var debut = LatLng(latFournisseur, longFournisseur);
-    var fin = LatLng(latClient, longClient);
+    double longitude1 = double.parse(longFournisseur);
+    double latitude1 = double.parse(latFournisseur);
+
+    double longitude2 = double.parse(longClient);
+    double latitude2 = double.parse(latClient);
+
+    var debut = LatLng(latitude1, longitude1);
+    var fin = LatLng(latitude2, longitude2);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[900],
@@ -30,21 +37,20 @@ class OrderTrackingPage extends StatelessWidget {
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
-          target: sourceLocation,
+          target: debut,
           zoom: 13.5,
         ),
         markers: {
           Marker(
               markerId: const MarkerId("Source"),
-              position: sourceLocation,
-              infoWindow: const InfoWindow(
-                  title: 'Le Vendeur', snippet: 'Fournisseur')),
+              position: debut,
+              infoWindow:
+                  const InfoWindow(title: 'Le Vendeur', snippet: '(Miagbo)')),
           Marker(
               markerId: const MarkerId("Destionation"),
-              position: destination,
-              infoWindow: const InfoWindow(
-                title: 'Le Client',
-              )),
+              position: fin,
+              infoWindow:
+                  const InfoWindow(title: 'Le Client', snippet: 'à livré')),
         },
       ),
     );

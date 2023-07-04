@@ -28,7 +28,7 @@ class _ProfileState extends State<Profile> {
               const SizedBox(height: 40),
               const CircleAvatar(
                 radius: 70,
-                backgroundImage: AssetImage("assets/images/profilee.jpg"),
+                backgroundImage: AssetImage("assets/images/user.jpg"),
               ),
               const SizedBox(height: 20),
               // Nom Prenom
@@ -44,7 +44,7 @@ class _ProfileState extends State<Profile> {
                           blurRadius: 10)
                     ]),
                 child: const ListTile(
-                  title: Text("Name"),
+                  title: Text("Nom"),
                   subtitle: Text("ASSIH Jacques"),
                   leading: Icon(CupertinoIcons.person),
                   trailing: Icon(Icons.arrow_forward, color: Colors.grey),
@@ -93,7 +93,6 @@ class _ProfileState extends State<Profile> {
                   tileColor: Colors.white,
                 ),
               ),
-             
             ],
           ),
         ));
